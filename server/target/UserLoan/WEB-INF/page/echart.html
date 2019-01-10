@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymmeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <script src="/static/js/jquery-3.3.1.js"></script>
+</head>
+<body>
+<div>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="height:400px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="/static/echarts-2.2.7/build/dist/echarts.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        var dataName = [];
+        var dataNumber = [];
+        $(function () {
+            var list = [[${list}]];
+            for (var i = 0; i < list.length; i++) {
+                console.log(list[i].phoneNumber);
+                console.log(list[i].id);
+                dataName.push(list[i].phoneNumber);
+                dataNumber.push(list[i].id);
+            }
+        });
+
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: '/static/echarts-2.2.7/build/dist'
+            }
+        });
+
+        // 使用
+        require(
+            [
+                'echarts',
+                'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main'));
+
+                var option = {
+                    tooltip: {
+                        show: true
+                    },
+                    legend: {
+                        data: ['销量']
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: dataName
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value'
+                        }
+                    ],
+                    series: [
+                        {
+                            "name": "销量",
+                            "type": "bar",
+                            "data": dataNumber
+                        }
+                    ]
+                };
+
+                // 为echarts对象加载数据
+                myChart.setOption(option);
+            }
+        );
+    </script></div>
+<div>
+    sdadsd
+</div>
+</body>

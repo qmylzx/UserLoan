@@ -29,14 +29,12 @@
             <param-value>classpath:/spring/spring-*.xml</param-value>
         </init-param>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>SpringMVC</servlet-name>
-        <url-pattern>*.action</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SpringMVC</servlet-name>
-        <url-pattern>*.json</url-pattern>
-    </servlet-mapping>
+
     <!-- 字符过滤，防止post请求乱码 -->
     <filter>
         <filter-name>SpringCharacterEncodingFilter</filter-name>
