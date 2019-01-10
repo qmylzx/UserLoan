@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymmeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <title>Bootstrap Admin Template </title>
+    <link rel="shortcut icon" href="/static/ui/img/favicon.ico">
+    <!-- global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="/static/ui/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/ui/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/ui/css/font-icon-style.css">
+    <link rel="stylesheet" href="/static/ui/css/style.default.css" id="theme-stylesheet">
+
+    <!-- Core stylesheets -->
+    <link rel="stylesheet" href="/static/ui/css/ui-elements/card.css">
+    <link rel="stylesheet" href="/static/ui/css/style.css">
+</head>
+
+<body>
+
+<!--====================================================
+                         MAIN NAVBAR
+======================================================-->
+<header class="header">
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid ">
+            <div class="navbar-holder d-flex align-items-center justify-content-between">
+                <div class="navbar-header">
+                    <a href="index.html" class="navbar-brand">
+                        <div class="brand-text brand-big hidden-lg-down"><img src="/static/ui/img/logo-white.png"
+                                                                              alt="Logo" class="img-fluid"></div>
+                        <div class="brand-text brand-small"><img src="/static/ui/img/logo-icon.png" alt="Logo"
+                                                                 class="img-fluid"></div>
+                    </a>
+                    <a id="toggle-btn" href="#" class="menu-btn active">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+            <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+
+                <!-- Notifications-->
+                <li class="nav-item dropdown">
+                    <a id="notifications" class="nav-link" rel="nofollow" data-target="#" href="#"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                            class="fa fa-bell-o"></i><span class="noti-numb-bg"></span><span class="badge">12</span></a>
+                    <ul aria-labelledby="notifications" class="dropdown-menu">
+                        <li>
+                            <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                <div class="notification">
+                                    <div class="notification-content"><i class="fa fa-envelope bg-red"></i>You have 6
+                                        new messages
+                                    </div>
+                                    <div class="notification-time">
+                                        <small>4 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                <div class="notification">
+                                    <div class="notification-content"><i class="fa fa-twitter bg-skyblue"></i>You have 2
+                                        followers
+                                    </div>
+                                    <div class="notification-time">
+                                        <small>4 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                <div class="notification">
+                                    <div class="notification-content"><i class="fa fa-upload bg-blue"></i>Server
+                                        Rebooted
+                                    </div>
+                                    <div class="notification-time">
+                                        <small>4 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                <div class="notification">
+                                    <div class="notification-content"><i class="fa fa-twitter bg-skyblue"></i>You have 2
+                                        followers
+                                    </div>
+                                    <div class="notification-time">
+                                        <small>10 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>view
+                            all notifications </strong></a></li>
+                    </ul>
+                </li>
+                <!-- Messages-->
+                <li class="nav-item dropdown"><a id="messages" class="nav-link logout" rel="nofollow" data-target="#"
+                                                 href="#" data-toggle="dropdown" aria-haspopup="true"
+                                                 aria-expanded="false"><i class="fa fa-envelope-o"></i><span
+                        class="noti-numb-bg"></span><span class="badge">10</span></a>
+                    <ul aria-labelledby="messages" class="dropdown-menu">
+                        <li>
+                            <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                <div class="msg-profile"><img src="/static/ui/img/avatar-1.jpg" alt="..."
+                                                              class="img-fluid rounded-circle"></div>
+                                <div class="msg-body">
+                                    <h3 class="h5 msg-nav-h3">Jason Doe</h3><span>Sent You Message</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                <div class="msg-profile"><img src="/static/ui/img/avatar-2.jpg" alt="..."
+                                                              class="img-fluid rounded-circle"></div>
+                                <div class="msg-body">
+                                    <h3 class="h5 msg-nav-h3">Frank Williams</h3><span>Sent You Message</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                <div class="msg-profile"><img src="/static/ui/img/avatar-3.jpg" alt="..."
+                                                              class="img-fluid rounded-circle"></div>
+                                <div class="msg-body">
+                                    <h3 class="h5 msg-nav-h3">Ashley Wood</h3><span>Sent You Message</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Read
+                            all messages </strong></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<!--====================================================
+                        PAGE CONTENT
+======================================================-->
+<div class="page-content d-flex align-items-stretch">
+
+    <!--***** SIDE NAVBAR *****-->
+    <nav class="side-navbar">
+        <div class="sidebar-header d-flex align-items-center">
+            <div class="avatar"><img src="/static/ui/img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
+            <div class="title">
+                <h1 class="h4">Steena Ben</h1>
+            </div>
+        </div>
+        <hr>
+        <!-- Sidebar Navidation Menus-->
+        <ul class="list-unstyled">
+            <li class="active"><a href="http://localhost:8080/user/index"><i class="icon-home"></i>主页</a></li>
+            <li><a href="http://localhost:8080/user/whiteList"> <i class="fa fa-file-o"></i>白名单</a></li>
+            <li><a href="http://localhost:8080/user/infoManager"> <i class="fa fa-file-o"></i>个人信息管理</a></li>
+            <li><a href="http://localhost:8080/user/repay"> <i class="fa fa-file-o"></i>还款预警</a></li>
+        </ul>
+    </nav>
+    <!--正文-->
+    <div class="content-inner">
+        <div style="text-align:center"><b>用户信息展示</b></div>
+        <div style="height: 200px;background-color: #b1dfbb">基本信息</div>
+        <div>
+            <div>   <!-- 第1个 -->
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="main" style="height:300px;width: 49%; float:left;border:1px"></div>
+                <!-- ECharts单文件引入 -->
+                <script src="/static/echarts-2.2.7/build/dist/echarts.js"></script>
+                <script type="text/javascript" th:inline="javascript">
+                    var dataName = [];
+                    var dataNumber = [];
+                    var list = [[${list}]];
+                    for (var i = 0; i < list.length; i++) {
+                        dataName.push(list[i].phoneNumber);
+                        dataNumber.push(list[i].id);
+                    }
+
+                    // 路径配置
+                    require.config({
+                        paths: {
+                            echarts: '/static/echarts-2.2.7/build/dist'
+                        }
+                    });
+
+                    // 使用
+                    require(
+                        [
+                            'echarts',
+                            'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+                        ],
+                        function (ec) {
+                            // 基于准备好的dom，初始化echarts图表
+                            var myChart = ec.init(document.getElementById('main'));
+
+                            var option = {
+                                tooltip: {
+                                    show: true
+                                },
+                                legend: {
+                                    data: ['销量']
+                                },
+                                xAxis: [
+                                    {
+                                        type: 'category',
+                                        data: dataName
+                                    }
+                                ],
+                                yAxis: [
+                                    {
+                                        type: 'value'
+                                    }
+                                ],
+                                series: [
+                                    {
+                                        "name": "销量",
+                                        "type": "bar",
+                                        "data": dataNumber
+                                    }
+                                ]
+                            };
+                            // 为echarts对象加载数据
+                            myChart.setOption(option);
+                        }
+                    );
+                </script>
+            </div>
+            <div>  <!-- 第二个 -->
+                <div id="main1" style="height:300px;width: 49%; float:right;border:1px"></div>
+                <!-- ECharts单文件引入 -->
+                <script src="/static/echarts-2.2.7/build/dist/echarts.js"></script>
+                <script type="text/javascript" th:inline="javascript">
+                    var dataName = [];
+                    var dataNumber = [];
+                    var list = [[${list}]];
+                    for (var i = 0; i < list.length; i++) {
+                        dataName.push(list[i].phoneNumber);
+                        dataNumber.push(list[i].id);
+                    }
+                    // 路径配置
+                    require.config({
+                        paths: {
+                            echarts: '/static/echarts-2.2.7/build/dist'
+                        }
+                    });
+                    // 使用
+                    require(
+                        [
+                            'echarts',
+                            'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+                        ],
+                        function (ec) {
+                            // 基于准备好的dom，初始化echarts图表
+                            var myChart = ec.init(document.getElementById('main1'));
+
+                            var option = {
+                                tooltip: {
+                                    show: true
+                                },
+                                legend: {
+                                    data: ['销量']
+                                },
+                                xAxis: [
+                                    {
+                                        type: 'category',
+                                        data: dataName
+                                    }
+                                ],
+                                yAxis: [
+                                    {
+                                        type: 'value'
+                                    }
+                                ],
+                                series: [
+                                    {
+                                        "name": "销量",
+                                        "type": "bar",
+                                        "data": dataNumber
+                                    }
+                                ]
+                            };
+
+                            // 为echarts对象加载数据
+                            myChart.setOption(option);
+                        }
+                    );
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!--Global Javascript -->
+<script src="/static/ui/js/jquery.min.js"></script>
+<script src="/static/ui/js/popper/popper.min.js"></script>
+<script src="/static/ui/js/tether.min.js"></script>
+<script src="/static/ui/js/bootstrap.min.js"></script>
+<script src="/static/ui/js/jquery.cookie.js"></script>
+<script src="/static/ui/js/jquery.validate.min.js"></script>
+<script src="/static/ui/js/chart.min.js"></script>
+<script src="/static/ui/js/front.js"></script>
+</body>
+
+</html>
