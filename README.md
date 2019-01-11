@@ -1,26 +1,2 @@
-# UserLoan
-algorithm   py 算法实现
-
-server    java 客户端
-
-获取本 repo 读写权限
-
-git clone https://github.com/qmylzx/UserLoan.git
-
-cd UserLoan
-
-git config --global user.name 你的名字
-
-git config --global user.email 你的邮箱
-
-git add .
-
-git commit -am "modify something"
-
-git push -u origin master 上传自己的代码
-
-以后只需要 git push 就可以上传代码了。
-
-如果报错， 先执行 git pull origin master再执行git push origin master
-
-如果进入一个奇怪的页面，输入:wq
+# 用户违约分析系统
+​	随着消费水平的提高以及物价的上涨，越来越多的人会使用信用卡等方式向银行等投资方进行贷款。为了给投资方提供了关键的决策依据，促进健康高效的互联网金融，本系统对用户的借款纪录，银行流水，延期纪录等数据进行分析，使用LightGBM、XGBoost、SVM等算法模型建模，预测用户延期的可能性，最后前端使用Echarts图形库向投资方展示用户的客观信息，方便投资方快速了解贷款人基本信息并进行主观上的判断。
