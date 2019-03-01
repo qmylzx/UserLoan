@@ -208,8 +208,6 @@
 <script src="/static/ui/js/front.js"></script>
 <script>
     $("#submit").click(function () {
-            console.log(window.location.protocol);
-            console.log(window.location.host);
             $.ajax({
                 url: window.location.protocol + "//" + window.location.host + "/user/modify",
                 type: "POST",
@@ -217,9 +215,9 @@
                 data: $("#form1").serialize(),
                 success: function (rtn) {
                     if (rtn.code == "000000") {
-                        alert("成功");
+                        alert(rtn.message);
                     } else {
-                        alert("失败");
+                        alert(rtn.message);
                     }
                 }, error: function (rtn) {
                     console.log(rtn);

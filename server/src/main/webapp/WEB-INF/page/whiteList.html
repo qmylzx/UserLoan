@@ -18,6 +18,7 @@
     <!-- Core stylesheets -->
     <link rel="stylesheet" href="/static/ui/css/ui-elements/card.css">
     <link rel="stylesheet" href="/static/ui/css/style.css">
+    <link rel="stylesheet" href="/static/css/button.css">
 </head>
 
 <body>
@@ -177,16 +178,16 @@
                 <!-- 标题检索 -->
                 <input type="text" class="text" id="chaxun" value="" size="30" placeholder="根据id查询"/>
                 <!-- 点击查询按钮 -->
-                <button style="margin-top: -3px;"
+                <button style="margin-top: -3px;" class="button icon-search button-primary button-pill button-small"
                         onclick="search()"><span
-                        class="icon-search">查询</span></button>
+                >查询</span></button>
             </div>
         </div>
 
         <div class="row" id="report3">
             <div class="col-md-12">
                 <div class="card card-c2">
-                    <table class="table table-hover" id="table">
+                    <table class="table table-hover" id="table"  style="background: #EEF5F9">
                         <thead>
                         <tr>
                             <th>用户id</th>
@@ -198,15 +199,15 @@
                         </tr>
                         </thead>
                         <tbody><!--数据-->
-                        <tr th:each="m:${list}">
+                        <tr th:each="m:${pageInfo.list}">
                             <td th:text="${m.id}"/>
                             <td th:text="${m.sex}"/>
                             <td th:text="${m.education}"/>
                             <td th:text="${m.job}"/>
-                            <td th:text="${m.phoneNumber}"/>
+                            <td th:text="${m.houseType}"/>
                             <td>
                                 <button class="button" onclick="show(this)">用户详情</button>
-                                <button class="button">移除</button>
+                                <button class="button"  onclick="removeWhite(this)">移除</button>
                             </td>
                         </tr>
                         </tbody>
@@ -218,8 +219,59 @@
                             console.log(window.location.protocol + "//" + window.location.host + "/user/show/" + id);
                             window.location.href = window.location.protocol + "//" + window.location.host + "/user/show/" + id;
                         }
+                        function removeWhite(t) {//这里根据用户id跳转页面
+                            var id = $(t).parents('tr').children('td:nth-child(1)').text();//获取的行用户id
+                            console.log(id);
+                            $.ajax({
+                                url: window.location.protocol+"//"+window.location.host+"/user/remove?id="+id,
+                                type: "POST",
+                                dataType: "json",
+                                data: [],
+                                success: function (rtn) {
+                                    if (rtn.code == "000000") {
+                                        window.location.href = window.location.protocol + "//" + window.location.host + "/user/whiteList";
+                                    } else {
+                                        alert(rtn.message);
+                                    }
+                                }, error: function (rtn) {
+                                    console.log(rtn);
+                                }
+                            });
+                        }
                     </script>
                 </div>
+
+                <div class="modal-footer no-margin-top">
+                    <div class="col-md-6">
+                        当前第 [[${pageInfo.pageNum}]]页,共 [[${pageInfo.pages}]] 页.一共 [[${pageInfo.total}]] 条记录
+                    </div>
+
+                    <ul class="pagination pull-right no-margin">
+                        <li th:if="${pageInfo.hasPreviousPage}">
+                            <a th:href="'/user/whiteList?pageNum=1'">首页</a>
+                        </li>
+
+                        <li class="prev" th:if="${pageInfo.hasPreviousPage}">
+                            <a th:href="'/user/whiteList?pageNum='+${pageInfo.prePage}">
+                                <i class="ace-icon fa fa-angle-double-left"></i>
+                            </a>
+                        </li>
+                        <!--遍历条数-->
+                        <li th:each="nav:${pageInfo.navigatepageNums}">
+                            <a th:href="'/user/whiteList?pageNum='+${nav}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
+                            <span style="font-weight: bold;background: #6faed9;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}" ></span>
+                        </li>
+                        <li class="next" th:if="${pageInfo.hasNextPage}">
+                            <a th:href="'/user/whiteList?pageNum='+${pageInfo.nextPage}">
+                                <i class="ace-icon fa fa-angle-double-right"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="'/user/whiteList?pageNum='+${pageInfo.pages}">尾页</a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </div>
     </div>
@@ -238,7 +290,7 @@
 
 <script th:inline="javascript">
     function search() {//0  6  12
-        var count = [[${list}]].length;
+        var count = [[${pageInfo.list}]].length;
         var param = document.getElementById("chaxun").value.trim();//获取搜索框数据
         var table = document.getElementById("table");//获取表格object
         for (var i = 0, j = 1; i < count * 6; j++) {//表格单元格数 即循环次数

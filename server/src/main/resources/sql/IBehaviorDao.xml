@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="base.dao.IBehaviorDao">
+	
+	<!-- 建立sql查询结果字段与实体属性的映射关系 -->
+	<resultMap id="IBehaviorMap" type="base.pojo.Behavior">
+		<result column="browse_behavior" property="behavior" />
+		<result column="number" property="count" />
+	</resultMap>
+	<!-- 校验用户 -->
+	<select id="getBehavior" resultMap="IBehaviorMap">
+		SELECT browse_behavior,count(browse_behavior) as number
+		from (SELECT * from browse_history WHERE user_id = #{id}) a
+		GROUP BY browse_behavior
+	</select>
+
+
+</mapper>

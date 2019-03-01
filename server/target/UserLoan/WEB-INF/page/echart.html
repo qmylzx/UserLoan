@@ -7,73 +7,139 @@
 </head>
 <body>
 <div>
-    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="main" style="height:400px"></div>
-    <!-- ECharts单文件引入 -->
-    <script src="/static/echarts-2.2.7/build/dist/echarts.js"></script>
-    <script type="text/javascript" th:inline="javascript">
-        var dataName = [];
-        var dataNumber = [];
-        $(function () {
-            var list = [[${list}]];
-            for (var i = 0; i < list.length; i++) {
-                console.log(list[i].phoneNumber);
-                console.log(list[i].id);
-                dataName.push(list[i].phoneNumber);
-                dataNumber.push(list[i].id);
+
+    <div style="height: 20px">
+        <div style="width: 10%;float: left">
+            当前用户： <b th:text="${session.userId}"></b>
+        </div>
+        <div style="width: 10%;float: right">
+            <button onclick="backTo()">返回</button>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript" src="/static/echarts/echarts-all.js"></script>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="height:400px"></div>
+<div id="main1" style="height:400px"></div>
+<script type="text/javascript" th:inline="javascript">
+    var list = [[${list}]];
+    var list1 =  [[${list1}]];
+    var data = new Array();
+    for (var i = 0; i < list.length; i++) {
+        data[i] = new Array(2);
+        data[i][0] = list[i].index;
+        data[i][1] = list[i].money;
+    }
+
+    var data1 = new Array();
+    for (var i = 0; i < list1.length; i++) {
+        data1[i] = new Array(2);
+        data1[i][0] = list1[i].index;
+        data1[i][1] = list1[i].money;
+    }
+
+    // 基于准备好的dom，初始化echarts图表
+    var myChart = echarts.init(document.getElementById('main'));
+    var myChart1 = echarts.init(document.getElementById('main1'));
+    // 指定图表的配置项和数据
+    option = {
+        title: {
+            text: '收入'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        xAxis: {
+            data: data.map(function (item) {
+                return item[0];
+            })
+        },
+        yAxis: {
+            splitLine: {
+                show: false
             }
-        });
-
-        // 路径配置
-        require.config({
-            paths: {
-                echarts: '/static/echarts-2.2.7/build/dist'
+        },
+        dataZoom: [{
+            startValue: '2014-06-01'
+        }, {
+            type: 'inside'
+        }],
+        series: {
+            name: '收入',
+            type: 'line',
+            data: data.map(function (item) {
+                return item[1];
+            }),
+            markLine: {
+                silent: true,
+                data: [{
+                    yAxis: 50
+                }, {
+                    yAxis: 100
+                }, {
+                    yAxis: 150
+                }, {
+                    yAxis: 200
+                }, {
+                    yAxis: 300
+                }]
             }
-        });
+        }
+    };
 
-        // 使用
-        require(
-            [
-                'echarts',
-                'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
-            ],
-            function (ec) {
-                // 基于准备好的dom，初始化echarts图表
-                var myChart = ec.init(document.getElementById('main'));
-
-                var option = {
-                    tooltip: {
-                        show: true
-                    },
-                    legend: {
-                        data: ['销量']
-                    },
-                    xAxis: [
-                        {
-                            type: 'category',
-                            data: dataName
-                        }
-                    ],
-                    yAxis: [
-                        {
-                            type: 'value'
-                        }
-                    ],
-                    series: [
-                        {
-                            "name": "销量",
-                            "type": "bar",
-                            "data": dataNumber
-                        }
-                    ]
-                };
-
-                // 为echarts对象加载数据
-                myChart.setOption(option);
+    option1 = {
+        title: {
+            text: '支出'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        xAxis: {
+            data: data1.map(function (item) {
+                return item[0];
+            })
+        },
+        yAxis: {
+            splitLine: {
+                show: false
             }
-        );
-    </script></div>
-<div>
-    sdadsd
+        },
+        dataZoom: [{
+            startValue: '2014-06-01'
+        }, {
+            type: 'inside'
+        }],
+        series: {
+            name: '支出',
+            type: 'line',
+            data: data1.map(function (item) {
+                return item[1];
+            }),
+            markLine: {
+                silent: true,
+                data: [{
+                    yAxis: 50
+                }, {
+                    yAxis: 100
+                }, {
+                    yAxis: 150
+                }, {
+                    yAxis: 200
+                }, {
+                    yAxis: 300
+                }]
+            }
+        }
+    };
+
+    myChart.setOption(option);
+    myChart1.setOption(option1);
+    function backTo() {
+        history.go(-1);
+    }
+
+</script>
+
 </div>
 </body>

@@ -18,6 +18,7 @@
     <!-- Core stylesheets -->
     <link rel="stylesheet" href="/static/ui/css/ui-elements/card.css">
     <link rel="stylesheet" href="/static/ui/css/style.css">
+    <link rel="stylesheet" href="/static/css/button.css">
 </head>
 
 <body>
@@ -190,26 +191,54 @@
                         <thead>
                         <tr>
                             <th>用户id</th>
+                            <th>     </th>
                             <th>性别</th>
+                            <th>     </th>
                             <th>教育程度</th>
+                            <th>     </th>
                             <th>职业</th>
-                            <th>联系方式</th>
+                            <th>     </th>
+                            <th>户口类型</th>
+                            <th>     </th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody><!--数据-->
-                        <tr th:each="m:${list}">
-                            <td th:text="${m.id}"/>
-                            <td th:text="${m.sex}"/>
-                            <td th:text="${m.education}"/>
-                            <td th:text="${m.job}"/>
-                            <td th:text="${m.phoneNumber}"/>
+                        <tr th:each="m:${pageInfo.list}">
+                            <td th:text="${m.id}"> <td/>
+                            <td th:if="${m.sex}">
+                                <span th:if="${m.sex} eq 0">未知</span>
+                                <span th:if="${m.sex} eq 1">男</span>
+                                <span th:if="${m.sex} eq 2">女</span>
+                            <td/>
                             <td>
-                                <button class="button" onclick="show(this)">用户详情</button>
+                                <span th:if="${m.education} eq 0">未知</span>
+                                <span th:if="${m.education} eq 1">博士</span>
+                                <span th:if="${m.education} eq 2">硕士</span>
+                                <span th:if="${m.education} eq 3">本科</span>
+                                <span th:if="${m.education} eq 4">高中/大专</span>
+                            <td/>
+                            <td>
+                                <span th:if="${m.job} eq 0">国家机关事业单位人员</span>
+                                <span th:if="${m.job} eq 1">农、林、牧、渔、水利业生产人员</span>
+                                <span th:if="${m.job} eq 2">商业，办事，服务类人员</span>
+                                <span th:if="${m.job} eq 3">生产、运输设备操作人员及有关人员</span>
+                                <span th:if="${m.job} eq 4">技术从业人员</span>
+                            <td/>
+                            <td>
+                                <span th:if="${m.houseType} eq 0">未知</span>
+                                <span th:if="${m.houseType} eq 1">农业户口</span>
+                                <span th:if="${m.houseType} eq 2">城镇居民户口</span>
+                                <span th:if="${m.houseType} eq 3">集体户口</span>
+                                <span th:if="${m.houseType} eq 4">农村居民户口</span>
+                            <td/>
+                            <td>
+                                <button class="button button-primary button-pill button-small" onclick="show(this)">用户详情</button>
                             </td>
                         </tr>
                         </tbody>
                     </table>
+
                     <script>
                         function show(t) {//这里根据用户id跳转页面
                             var id = $(t).parents('tr').children('td:nth-child(1)').text();//获取的行用户id
@@ -219,6 +248,37 @@
                         }
                     </script>
                 </div>
+                <div class="modal-footer no-margin-top">
+                    <div class="col-md-6">
+                        当前第 [[${pageInfo.pageNum}]]页,共 [[${pageInfo.pages}]] 页.一共 [[${pageInfo.total}]] 条记录
+                    </div>
+
+                    <ul class="pagination pull-right no-margin">
+                        <li th:if="${pageInfo.hasPreviousPage}">
+                            <a th:href="'/user/index?pageNum=1'">首页</a>
+                        </li>
+
+                        <li class="prev" th:if="${pageInfo.hasPreviousPage}">
+                            <a th:href="'/user/index?pageNum='+${pageInfo.prePage}">
+                                <i class="ace-icon fa fa-angle-double-left"></i>
+                            </a>
+                        </li>
+                        <!--遍历条数-->
+                        <li th:each="nav:${pageInfo.navigatepageNums}">
+                            <a th:href="'/user/index?pageNum='+${nav}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
+                            <span style="font-weight: bold;background: #6faed9;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}" ></span>
+                        </li>
+                        <li class="next" th:if="${pageInfo.hasNextPage}">
+                            <a th:href="'/user/index?pageNum='+${pageInfo.nextPage}">
+                                <i class="ace-icon fa fa-angle-double-right"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="'/user/index?pageNum='+${pageInfo.pages}">尾页</a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </div>
     </div>
@@ -234,28 +294,29 @@
 <script src="/static/ui/js/jquery.validate.min.js"></script>
 <script src="/static/ui/js/chart.min.js"></script>
 <script src="/static/ui/js/front.js"></script>
-
+<script src="/static/ui/js/bootstrap-paginator.js"></script>
 <script th:inline="javascript">
     function search() {//0  6  12
-        var count = [[${list}]].length;
+        var count = [[${pageInfo.list}]].length;
         var param = document.getElementById("chaxun").value.trim();//获取搜索框数据
         var table = document.getElementById("table");//获取表格object
-        for (var i = 0, j = 1; i < count * 6; j++) {//表格单元格数 即循环次数
+        console.log("sss"+param);
+        for (var i = 0; i < count * 11; ) {//表格单元格数 即循环次数
             var temp =  table.getElementsByTagName("td")[i].parentNode;
+            console.log(table.getElementsByTagName("td")[i].innerHTML==param);
+            console.log("CURR"+table.getElementsByTagName("td")[i].innerHTML);
             if (table.getElementsByTagName("td")[i].innerHTML == param) {
-                console.log("==");
-                console.log(temp);
                 temp.style.display='';
             } else {
                 temp.style.display='none';
             }
-            i = i + 6;
+            i = i+11;
         }
         if(param==""){
-            for (var i = 0, j = 1; i < count * 6; j++) {//表格单元格数 即循环次数
+            for (var i = 0; i < count * 11;) {//表格单元格数 即循环次数
                 var temp =  table.getElementsByTagName("td")[i].parentNode;
                 temp.style.display='';
-                i = i + 6;
+                i = i + 11;
             }
         }
     }

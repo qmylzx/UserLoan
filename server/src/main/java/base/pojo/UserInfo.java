@@ -1,5 +1,7 @@
 package base.pojo;
 
+import com.google.gson.Gson;
+
 public class UserInfo {
     private String id;	// 主键
     private String loginName;	// 登录名
@@ -33,5 +35,10 @@ public class UserInfo {
 
     public void setPassWord(String passWord) {
         this.passWord = passWord;
+    }
+
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
     }
 }

@@ -18,6 +18,8 @@
     <!-- Core stylesheets -->
     <link rel="stylesheet" href="/static/ui/css/ui-elements/card.css">
     <link rel="stylesheet" href="/static/ui/css/style.css">
+    <link rel="stylesheet" href="/static/css/button.css">
+    <script src="/static/echarts/echarts.js"></script>
 </head>
 
 <body>
@@ -169,88 +171,102 @@
     </nav>
     <!--正文-->
     <div class="content-inner">
-        <div style="text-align:center"><b>用户信息展示</b></div>
-        <div style="height: 200px;background-color: #b1dfbb">基本信息</div>
+        <div style="text-align:center"><b style="font-size: 20px">用户信息展示</b></div>
+        <div style="height: 350px">
+            <div style="text-align:right"><button class="button button-primary button-pill button-small" onclick="showincome()">收入支出情况</button><button class="button button-primary button-pill button-small" onclick="addWhite()">加入白名单</button></div>
+            <table class="table table-hover" id="table" >
+                <thead>
+                </thead>
+                <tbody><!--数据-->
+                <tr>
+                    <td>用户名： <td/>
+                    <td>
+                        <b th:text="${session.user.id}"></b>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>工作： <td/>
+                    <td>
+                        <b th:if="${session.user.job} eq 0">国家机关事业单位人员</b>
+                        <b th:if="${session.user.job} eq 1">农、林、牧、渔、水利业生产人员</b>
+                        <b th:if="${session.user.job} eq 2">商业，办事，服务类人员</b>
+                        <b th:if="${session.user.job} eq 3">生产、运输设备操作人员及有关人员</b>
+                        <b th:if="${session.user.job} eq 4">技术从业人员</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>学历： <td/>
+                    <td>
+                        <b th:if="${session.user.education} eq 0">未知</b>
+                        <b th:if="${session.user.education} eq 1">博士</b>
+                        <b th:if="${session.user.education} eq 2">硕士</b>
+                        <b th:if="${session.user.education} eq 3">本科</b>
+                        <b th:if="${session.user.education} eq 4">高中/大专</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>户口类型： <td/>
+                    <td>
+                        <b th:if="${session.user.houseType} eq 0">未知</b>
+                        <b th:if="${session.user.houseType} eq 1">农业户口</b>
+                        <b th:if="${session.user.houseType} eq 2">城镇居民户口</b>
+                        <b th:if="${session.user.houseType} eq 3">集体户口</b>
+                        <b th:if="${session.user.houseType} eq 4">农村居民户口</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>违约概率(单位：%)： <td/>
+                    <td>
+                        <b th:text="${session.result}"></b>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
         <div>
-            <div>   <!-- 第1个 -->
+            <div style="text-align:center"><b>浏览行为记录</b></div>
+            <div>
                 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-                <div id="main" style="height:300px;width: 49%; float:left;border:1px"></div>
+                <div id="main2" style="height:300px"></div>
                 <!-- ECharts单文件引入 -->
-                <script src="/static/echarts-2.2.7/build/dist/echarts.js"></script>
                 <script type="text/javascript" th:inline="javascript">
-                    var dataName = [];
-                    var dataNumber = [];
-                    var list = [[${list}]];
-                    for (var i = 0; i < list.length; i++) {
-                        dataName.push(list[i].phoneNumber);
-                        dataNumber.push(list[i].id);
+                    function addWhite() {//这里根据用户id跳转页面
+                        var id = [[${session.userId}]];
+                        console.log(id);
+                        $.ajax({
+                            url: window.location.protocol + "//" + window.location.host + "/user/addWhite?id=" + id,
+                            type: "POST",
+                            dataType: "json",
+                            data: [],
+                            success: function (rtn) {
+                                if (rtn.code == "000000") {
+                                    window.location.href = window.location.protocol + "//" + window.location.host + "/user/whiteList";
+                                } else {
+                                    alert(rtn.message);
+                                }
+                            }, error: function (rtn) {
+                                console.log(rtn.message);
+                            }
+                        });
                     }
 
-                    // 路径配置
-                    require.config({
-                        paths: {
-                            echarts: '/static/echarts-2.2.7/build/dist'
-                        }
-                    });
+                    function showincome() {
+                        window.location =
+                            window.location.protocol + "//" + window.location.host + "/user/show/income";
+                    }
 
-                    // 使用
-                    require(
-                        [
-                            'echarts',
-                            'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
-                        ],
-                        function (ec) {
-                            // 基于准备好的dom，初始化echarts图表
-                            var myChart = ec.init(document.getElementById('main'));
-
-                            var option = {
-                                tooltip: {
-                                    show: true
-                                },
-                                legend: {
-                                    data: ['销量']
-                                },
-                                xAxis: [
-                                    {
-                                        type: 'category',
-                                        data: dataName
-                                    }
-                                ],
-                                yAxis: [
-                                    {
-                                        type: 'value'
-                                    }
-                                ],
-                                series: [
-                                    {
-                                        "name": "销量",
-                                        "type": "bar",
-                                        "data": dataNumber
-                                    }
-                                ]
-                            };
-                            // 为echarts对象加载数据
-                            myChart.setOption(option);
-                        }
-                    );
-                </script>
-            </div>
-            <div>  <!-- 第二个 -->
-                <div id="main1" style="height:300px;width: 49%; float:right;border:1px"></div>
-                <!-- ECharts单文件引入 -->
-                <script src="/static/echarts-2.2.7/build/dist/echarts.js"></script>
-                <script type="text/javascript" th:inline="javascript">
                     var dataName = [];
                     var dataNumber = [];
-                    var list = [[${list}]];
+                    var list = [[${beHaviorList}]];
                     for (var i = 0; i < list.length; i++) {
-                        dataName.push(list[i].phoneNumber);
-                        dataNumber.push(list[i].id);
+                        dataName.push(list[i].behavior);
+                        dataNumber.push(list[i].count);
                     }
                     // 路径配置
                     require.config({
                         paths: {
-                            echarts: '/static/echarts-2.2.7/build/dist'
+                            echarts: '/static/echarts'
                         }
                     });
                     // 使用
@@ -261,37 +277,23 @@
                         ],
                         function (ec) {
                             // 基于准备好的dom，初始化echarts图表
-                            var myChart = ec.init(document.getElementById('main1'));
-
-                            var option = {
-                                tooltip: {
-                                    show: true
+                            var myyyChart = ec.init(document.getElementById('main2'));
+                            // 指定图表的配置项和数据
+                            option = {
+                                xAxis: {
+                                    type: 'category',
+                                    data: dataName
                                 },
-                                legend: {
-                                    data: ['销量']
+                                yAxis: {
+                                    type: 'value'
                                 },
-                                xAxis: [
-                                    {
-                                        type: 'category',
-                                        data: dataName
-                                    }
-                                ],
-                                yAxis: [
-                                    {
-                                        type: 'value'
-                                    }
-                                ],
-                                series: [
-                                    {
-                                        "name": "销量",
-                                        "type": "bar",
-                                        "data": dataNumber
-                                    }
-                                ]
+                                series: [{
+                                    data: dataNumber,
+                                    type: 'bar'
+                                }]
                             };
-
                             // 为echarts对象加载数据
-                            myChart.setOption(option);
+                            myyyChart.setOption(option);
                         }
                     );
                 </script>
@@ -300,7 +302,6 @@
     </div>
 </div>
 </div>
-
 <!--Global Javascript -->
 <script src="/static/ui/js/jquery.min.js"></script>
 <script src="/static/ui/js/popper/popper.min.js"></script>
@@ -311,5 +312,4 @@
 <script src="/static/ui/js/chart.min.js"></script>
 <script src="/static/ui/js/front.js"></script>
 </body>
-
 </html>

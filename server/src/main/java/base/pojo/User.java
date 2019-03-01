@@ -7,7 +7,7 @@ public class User {
     private String sex;
     private String education;
     private String job;
-    private String phoneNumber;
+    private String houseType;
 
     public int getId() {
         return id;
@@ -41,12 +41,12 @@ public class User {
         this.job = job;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getHouseType() {
+        return houseType;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setHouseType(String houseType) {
+        this.houseType = houseType;
     }
 
     @Override

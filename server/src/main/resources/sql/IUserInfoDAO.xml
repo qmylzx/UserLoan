@@ -22,4 +22,12 @@
 		AND pass_word = #{passWord}
 	</select>
 
+    <insert id="registerUser">
+      INSERT INTO  user_info(login_name,pass_word) VALUES (#{loginName},#{passWord})
+    </insert>
+
+	<update id="updateUser" >
+      UPDATE user_info set login_name=#{loginName},pass_word=#{passWord} WHERE id = #{id}
+	</update>
+
 </mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="base.dao.IUserDao">
+	
+	<!-- 建立sql查询结果字段与实体属性的映射关系 -->
+	<resultMap id="UserInfoMap" type="base.pojo.User">
+		<result column="user_id" property="id" />
+		<result column="sex" property="sex" />
+		<result column="occupation" property="education" />
+		<result column="education" property="job" />
+		<result column="household_type" property="houseType" />
+	</resultMap>
+
+	<select id="showAll" resultMap="UserInfoMap">
+		SELECT
+			*
+		FROM
+			user
+	</select>
+
+	<select id="getUser" resultMap="UserInfoMap">
+		SELECT
+			*
+		FROM
+			user where user_id = #{id}
+	</select>
+
+	<insert id="addWhite">
+      INSERT INTO  whitelist(id,userid) VALUES (#{id},#{userId})
+    </insert>
+	<delete id="removeWhite">
+		DELETE FROM whitelist where userid = #{userId}
+	</delete>
+    <select id="getWhite" resultMap="UserInfoMap">
+		SELECT
+			*
+		FROM
+			user WHERE user_id IN(select userid from whitelist where id=#{id})
+	</select>
+
+</mapper>

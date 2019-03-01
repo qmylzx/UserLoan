@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/regist.css">
+    <script type="text/javascript" src="/static/js/jquery-3.3.1.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <article>
+        <h1><span>╳╳╳技术有限公司</span></h1>
+        <div class="main">
+            <form id="login">
+                <div class="userName">
+                    <input type="text" name="loginName" placeholder="用户名"><em>由5-8个字符组成！</em>
+                </div>
+                <div class="password">
+                    <input type="password" name="passWord" placeholder="密码"><em>使用字母、数字、符号两种及以上的组合，8-12个字符</em>
+                </div>
+                <div class="againpwd">
+                    <input type="password" name="passWord1" placeholder="再次输入密码"><em>两次密码不一致</em>
+                </div>
+                <input type="submit" value="注册" id="submit"  onclick="register()"/>
+            </form>
+        </div>
+    </article>
+
+</div>
+<script>
+    function register() {//这里根据用户id跳转页面
+        $.ajax({
+            url: window.location.protocol+"//"+window.location.host+"/user/doRegister",
+            type: "POST",
+            dataType: "json",
+            data: $("#login").serialize(),
+            success: function (rtn) {
+                if (rtn.code == "000000") {
+                    window.location.href = window.location.protocol+"//"+window.location.host;
+                } else {
+                    alert(rtn.message);
+                }
+            }, error: function (rtn) {
+                console.log(rtn);
+            }
+        });
+    }
+</script>
+</body>
+</html>

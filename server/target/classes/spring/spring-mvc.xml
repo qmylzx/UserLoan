@@ -55,5 +55,5 @@
     <!--全局异常处理器-->
     <!-- 全局异常处理器，只要实现HandlerExceptionResolver接口就是全局异常处理器-->
 
-    <!--<bean id="handlerExceptionResolver" class="com.qmylzx.ssm.exception.MyExceptionResolver"></bean>-->
+    <bean id="handlerExceptionResolver" class="base.exception.MyExceptionResolver"></bean>
 </beans>

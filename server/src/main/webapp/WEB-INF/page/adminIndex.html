@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymmeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <title>Bootstrap Admin Template </title>
+    <link rel="shortcut icon" href="/static/ui/img/favicon.ico">
+    <!-- global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="/static/ui/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/ui/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/ui/css/font-icon-style.css">
+    <link rel="stylesheet" href="/static/ui/css/style.default.css" id="theme-stylesheet">
+
+    <!-- Core stylesheets -->
+    <link rel="stylesheet" href="/static/ui/css/ui-elements/card.css">
+    <link rel="stylesheet" href="/static/ui/css/style.css">
+    <link rel="stylesheet" href="/static/css/button.css">
+</head>
+
+<body>
+
+<!--====================================================
+                         MAIN NAVBAR
+======================================================-->
+<header class="header">
+    <nav class="navbar navbar-expand-lg ">
+
+        <div class="container-fluid ">
+            <div class="navbar-holder d-flex align-items-center justify-content-between">
+                <div class="navbar-header">
+                    <a href="index.html" class="navbar-brand">
+                        <div class="brand-text brand-big hidden-lg-down"><img src="/static/ui/img/logo-white.png"
+                                                                              alt="Logo" class="img-fluid"></div>
+                        <div class="brand-text brand-small"><img src="/static/ui/img/logo-icon.png" alt="Logo"
+                                                                 class="img-fluid"></div>
+                    </a>
+                    <a id="toggle-btn" href="#" class="menu-btn active">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+            <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+
+
+                <!-- Notifications-->
+                <li class="nav-item dropdown">
+                    <a id="notifications" class="nav-link" rel="nofollow" data-target="#" href="#"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                            class="fa fa-bell-o"></i><span class="noti-numb-bg"></span><span class="badge">12</span></a>
+                    <ul aria-labelledby="notifications" class="dropdown-menu">
+                        <li>
+                            <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                <div class="notification">
+                                    <div class="notification-content"><i class="fa fa-envelope bg-red"></i>You have 6
+                                        new messages
+                                    </div>
+                                    <div class="notification-time">
+                                        <small>4 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                <div class="notification">
+                                    <div class="notification-content"><i class="fa fa-twitter bg-skyblue"></i>You have 2
+                                        followers
+                                    </div>
+                                    <div class="notification-time">
+                                        <small>4 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                <div class="notification">
+                                    <div class="notification-content"><i class="fa fa-upload bg-blue"></i>Server
+                                        Rebooted
+                                    </div>
+                                    <div class="notification-time">
+                                        <small>4 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                <div class="notification">
+                                    <div class="notification-content"><i class="fa fa-twitter bg-skyblue"></i>You have 2
+                                        followers
+                                    </div>
+                                    <div class="notification-time">
+                                        <small>10 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>view
+                            all notifications </strong></a></li>
+                    </ul>
+                </li>
+                <!-- Messages                        -->
+                <li class="nav-item dropdown"><a id="messages" class="nav-link logout" rel="nofollow" data-target="#"
+                                                 href="#" data-toggle="dropdown" aria-haspopup="true"
+                                                 aria-expanded="false"><i class="fa fa-envelope-o"></i><span
+                        class="noti-numb-bg"></span><span class="badge">10</span></a>
+                    <ul aria-labelledby="messages" class="dropdown-menu">
+                        <li>
+                            <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                <div class="msg-profile"><img src="/static/ui/img/avatar-1.jpg" alt="..."
+                                                              class="img-fluid rounded-circle"></div>
+                                <div class="msg-body">
+                                    <h3 class="h5 msg-nav-h3">Jason Doe</h3><span>Sent You Message</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                <div class="msg-profile"><img src="/static/ui/img/avatar-2.jpg" alt="..."
+                                                              class="img-fluid rounded-circle"></div>
+                                <div class="msg-body">
+                                    <h3 class="h5 msg-nav-h3">Frank Williams</h3><span>Sent You Message</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                <div class="msg-profile"><img src="/static/ui/img/avatar-3.jpg" alt="..."
+                                                              class="img-fluid rounded-circle"></div>
+                                <div class="msg-body">
+                                    <h3 class="h5 msg-nav-h3">Ashley Wood</h3><span>Sent You Message</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Read
+                            all messages </strong></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<!--====================================================
+                        PAGE CONTENT
+======================================================-->
+<div class="page-content d-flex align-items-stretch">
+
+    <!--***** SIDE NAVBAR *****-->
+    <nav class="side-navbar">
+        <div class="sidebar-header d-flex align-items-center">
+            <div class="avatar"><img src="/static/ui/img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
+            <div class="title">
+                <h1 class="h4">Steena Ben</h1>
+            </div>
+        </div>
+        <hr>
+        <!-- Sidebar Navidation Menus-->
+        <ul class="list-unstyled">
+            <li class="active"><a href="http://localhost:8080/user/index"><i class="icon-home"></i>主页</a></li>
+            <li><a href="http://localhost:8080/user/information"> <i class="fa fa-file-o"></i>用户信息管理</a></li>
+            <li><a href="http://localhost:8080/user/register"> <i class="fa fa-file-o"></i>用户信息注册</a></li>
+        </ul>
+    </nav>
+    <!--正文-->
+    <div class="content-inner">
+        <div class="row" id="report2">
+            <div style="width: 76%; float:left;border:1px"></div>
+            <div style="width: 23%;border:1px;float: right">
+                <!-- 标题检索 -->
+                <input type="text" class="text" id="chaxun" value="" size="30" placeholder="根据id查询"/>
+                <!-- 点击查询按钮 -->
+                <button style="margin-top: -3px;"
+                        onclick="search()"><span
+                        class="icon-search">查询</span></button>
+            </div>
+        </div>
+
+        <div class="row" id="report3">
+            <div class="col-md-12">
+                <div class="card card-c2">
+                    <table class="table table-hover" id="table">
+                        <thead>
+                        <tr>
+                            <th>用户id</th>
+                            <th>     </th>
+                            <th>性别</th>
+                            <th>     </th>
+                            <th>教育程度</th>
+                            <th>     </th>
+                            <th>职业</th>
+                            <th>     </th>
+                            <th>户口类型</th>
+                            <th>     </th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody><!--数据-->
+                        <tr th:each="m:${pageInfo.list}">
+                            <td th:text="${m.id}"> <td/>
+                            <td th:if="${m.sex}">
+                                <span th:if="${m.sex} eq 0">未知</span>
+                                <span th:if="${m.sex} eq 1">男</span>
+                                <span th:if="${m.sex} eq 2">女</span>
+                            <td/>
+                            <td>
+                                <span th:if="${m.education} eq 0">未知</span>
+                                <span th:if="${m.education} eq 1">博士</span>
+                                <span th:if="${m.education} eq 2">硕士</span>
+                                <span th:if="${m.education} eq 3">本科</span>
+                                <span th:if="${m.education} eq 4">高中/大专</span>
+                            <td/>
+                            <td>
+                                <span th:if="${m.job} eq 0">国家机关事业单位人员</span>
+                                <span th:if="${m.job} eq 1">农、林、牧、渔、水利业生产人员</span>
+                                <span th:if="${m.job} eq 2">商业，办事，服务类人员</span>
+                                <span th:if="${m.job} eq 3">生产、运输设备操作人员及有关人员</span>
+                                <span th:if="${m.job} eq 4">技术从业人员</span>
+                            <td/>
+                            <td>
+                                <span th:if="${m.houseType} eq 0">未知</span>
+                                <span th:if="${m.houseType} eq 1">农业户口</span>
+                                <span th:if="${m.houseType} eq 2">城镇居民户口</span>
+                                <span th:if="${m.houseType} eq 3">集体户口</span>
+                                <span th:if="${m.houseType} eq 4">农村居民户口</span>
+                            <td/>
+                            <td>
+                                <button class="button button-primary button-pill button-small" onclick="show(this)">用户详情</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <script>
+                        function show(t) {//这里根据用户id跳转页面
+                            var id = $(t).parents('tr').children('td:nth-child(1)').text();//获取的行用户id
+                            console.log(id);
+                            console.log(window.location.protocol + "//" + window.location.host + "/user/show/" + id);
+                            window.location.href = window.location.protocol + "//" + window.location.host + "/user/show/" + id;
+                        }
+                    </script>
+                </div>
+                <div class="modal-footer no-margin-top">
+                    <div class="col-md-6">
+                        当前第 [[${pageInfo.pageNum}]]页,共 [[${pageInfo.pages}]] 页.一共 [[${pageInfo.total}]] 条记录
+                    </div>
+
+                    <ul class="pagination pull-right no-margin">
+                        <li th:if="${pageInfo.hasPreviousPage}">
+                            <a th:href="'/user/index?pageNum=1'">首页</a>
+                        </li>
+
+                        <li class="prev" th:if="${pageInfo.hasPreviousPage}">
+                            <a th:href="'/user/index?pageNum='+${pageInfo.prePage}">
+                                <i class="ace-icon fa fa-angle-double-left"></i>
+                            </a>
+                        </li>
+                        <!--遍历条数-->
+                        <li th:each="nav:${pageInfo.navigatepageNums}">
+                            <a th:href="'/user/index?pageNum='+${nav}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
+                            <span style="font-weight: bold;background: #6faed9;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}" ></span>
+                        </li>
+                        <li class="next" th:if="${pageInfo.hasNextPage}">
+                            <a th:href="'/user/index?pageNum='+${pageInfo.nextPage}">
+                                <i class="ace-icon fa fa-angle-double-right"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="'/user/index?pageNum='+${pageInfo.pages}">尾页</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!--Global Javascript -->
+<script src="/static/ui/js/jquery.min.js"></script>
+<script src="/static/ui/js/popper/popper.min.js"></script>
+<script src="/static/ui/js/tether.min.js"></script>
+<script src="/static/ui/js/bootstrap.min.js"></script>
+<script src="/static/ui/js/jquery.cookie.js"></script>
+<script src="/static/ui/js/jquery.validate.min.js"></script>
+<script src="/static/ui/js/chart.min.js"></script>
+<script src="/static/ui/js/front.js"></script>
+<script src="/static/ui/js/bootstrap-paginator.js"></script>
+<script th:inline="javascript">
+    function search() {//0  6  12
+        var count = [[${pageInfo.list}]].length;
+        var param = document.getElementById("chaxun").value.trim();//获取搜索框数据
+        var table = document.getElementById("table");//获取表格object
+        console.log("sss"+param);
+        for (var i = 0; i < count * 11; ) {//表格单元格数 即循环次数
+            var temp =  table.getElementsByTagName("td")[i].parentNode;
+            console.log(table.getElementsByTagName("td")[i].innerHTML==param);
+            console.log("CURR"+table.getElementsByTagName("td")[i].innerHTML);
+            if (table.getElementsByTagName("td")[i].innerHTML == param) {
+                temp.style.display='';
+            } else {
+                temp.style.display='none';
+            }
+            i = i+11;
+        }
+        if(param==""){
+            for (var i = 0; i < count * 11;) {//表格单元格数 即循环次数
+                var temp =  table.getElementsByTagName("td")[i].parentNode;
+                temp.style.display='';
+                i = i + 11;
+            }
+        }
+    }
+
+</script>
+</body>
+
+</html>
